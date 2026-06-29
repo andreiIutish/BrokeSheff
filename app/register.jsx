@@ -31,7 +31,7 @@ export default function RegisterScreen() {
   const [loading, setLoading] = useState(false);
 
 
-  // --- Validation ---
+  // Validation
   // Returns true if everything looks good, false if there are errors
   function validate() {
     // Clear any previous errors first
@@ -66,7 +66,7 @@ export default function RegisterScreen() {
   }
 
 
-  // --- Handle register button press ---
+  // Handle register button press
   async function handleRegister() {
     // Stop here if validation fails
     if (!validate()) return;
@@ -84,13 +84,13 @@ export default function RegisterScreen() {
 
       const data = await response.json();
 
-      // If the server returned an error (email already exists, etc.)
+      // If the server returned an error 
       if (!response.ok) {
         setServerError(data.message || 'Registration failed. Please try again.');
         return;
       }
 
-      // Registration worked — send the user to the login screen
+      // Registration worked, send the user to the login screen
       router.replace('/login');
 
     } catch (error) {
@@ -103,7 +103,7 @@ export default function RegisterScreen() {
   }
 
 
-  // --- UI ---
+  // UI 
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
 
@@ -155,7 +155,7 @@ export default function RegisterScreen() {
       />
       {confirmPasswordError ? <Text style={styles.errorText}>{confirmPasswordError}</Text> : null}
 
-      {/* Server error (shown below the fields) */}
+      {/* Server error */}
       {serverError ? <Text style={styles.serverError}>{serverError}</Text> : null}
 
       {/* Register button */}

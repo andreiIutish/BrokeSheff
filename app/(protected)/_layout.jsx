@@ -15,11 +15,11 @@ export default function ProtectedLayout() {
       const token = await SecureStore.getItemAsync('token');
 
       if (!token) {
-        // No token found — send the user to login
+        // No token found send the user to login
         router.replace('/login');
       }
 
-      // Token exists — stop showing the spinner and render the screen
+      // Token existsstop showing the spinner and render the screen
       setChecking(false);
     }
 
@@ -35,7 +35,7 @@ export default function ProtectedLayout() {
     );
   }
 
-  // Render whichever screen is inside (protected)/
+  // Render whichever screen is inside /
   return <Slot />;
 }
 

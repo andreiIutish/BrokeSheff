@@ -15,7 +15,7 @@ import * as SecureStore from 'expo-secure-store';
 import { API_URL } from '@/constants/api';
 
 export default function LoginScreen() {
-  // --- State ---
+  // State 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -23,14 +23,14 @@ export default function LoginScreen() {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  // Error returned from the server (e.g. "Invalid email or password")
+  // Error returned from the server 
   const [serverError, setServerError] = useState('');
 
   // True while waiting for the server to respond
   const [loading, setLoading] = useState(false);
 
 
-  // --- Validation ---
+  // Validation 
   // Returns true if everything looks good, false if there are errors
   function validate() {
     // Clear any previous errors first
@@ -53,7 +53,7 @@ export default function LoginScreen() {
   }
 
 
-  // --- Handle login button press ---
+  // Handle login button press 
   async function handleLogin() {
     // Stop here if validation fails
     if (!validate()) return;
@@ -71,7 +71,7 @@ export default function LoginScreen() {
 
       const data = await response.json();
 
-      // If the server returned an error (wrong password, etc.)
+      // If the server returned an error 
       if (!response.ok) {
         setServerError(data.message || 'Login failed. Please try again.');
         return;
@@ -93,7 +93,7 @@ export default function LoginScreen() {
   }
 
 
-  // --- UI ---
+  // UI 
   return (
     <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
 
