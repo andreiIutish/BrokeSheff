@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
-export default function ExploreScreen() {
+export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">Explore</ThemedText>
+      <ThemedText type="title">Home</ThemedText>
     </ThemedView>
   );
 }
