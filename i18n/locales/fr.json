@@ -1,0 +1,20 @@
+{
+  "welcome":       "Bienvenue, Chef !",
+  "cheap":         "Repas Pas Chers",
+  "fast":          "Rapide (moins de 15m)",
+  "protein":       "Riche en Protéines",
+  "loading":       "Chargement des recettes...",
+  "feedError":     "Impossible de charger les recettes. Vérifiez votre clé API.",
+  "empty":         "Aucune recette trouvée. Essayez un autre filtre.",
+  "minutes":       "min",
+  "ingredients":   "Ingrédients",
+  "instructions":  "Instructions",
+  "servings":      "portions",
+  "goBack":        "Retour",
+  "detailError":   "Impossible de charger cette recette.",
+  "noSteps":       "Aucune instruction étape par étape disponible pour cette recette.",
+  "tagCheap":      "Pas cher",
+  "tagHealthy":    "Sain",
+  "tagVegetarian": "Végétarien",
+  "selectLanguage":"Choisir la langue"
+}

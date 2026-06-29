@@ -1,0 +1,20 @@
+{
+  "welcome":       "¡Bienvenido, Chef!",
+  "cheap":         "Comidas Baratas",
+  "fast":          "Rápido (menos de 15m)",
+  "protein":       "Alto en Proteínas",
+  "loading":       "Cargando recetas...",
+  "feedError":     "No se pudieron cargar las recetas. Verifica tu API key.",
+  "empty":         "No se encontraron recetas. Prueba otro filtro.",
+  "minutes":       "min",
+  "ingredients":   "Ingredientes",
+  "instructions":  "Instrucciones",
+  "servings":      "porciones",
+  "goBack":        "Volver",
+  "detailError":   "No se pudo cargar esta receta.",
+  "noSteps":       "No hay instrucciones paso a paso para esta receta.",
+  "tagCheap":      "Barato",
+  "tagHealthy":    "Saludable",
+  "tagVegetarian": "Vegetariano",
+  "selectLanguage":"Seleccionar Idioma"
+}

@@ -1,0 +1,20 @@
+{
+  "welcome":       "!ברוך הבא, שף",
+  "cheap":         "ארוחות זולות",
+  "fast":          "מהיר (עד 15 דקות)",
+  "protein":       "עתיר חלבון",
+  "loading":       "...טוען מתכונים",
+  "feedError":     ".לא ניתן לטעון מתכונים. בדוק את מפתח ה-API",
+  "empty":         ".לא נמצאו מתכונים. נסה סינון אחר",
+  "minutes":       "דקות",
+  "ingredients":   "מרכיבים",
+  "instructions":  "הוראות הכנה",
+  "servings":      "מנות",
+  "goBack":        "חזור",
+  "detailError":   ".לא ניתן לטעון את המתכון",
+  "noSteps":       ".אין הוראות שלב אחר שלב למתכון זה",
+  "tagCheap":      "זול",
+  "tagHealthy":    "בריא",
+  "tagVegetarian": "צמחוני",
+  "selectLanguage":"בחר שפה"
+}

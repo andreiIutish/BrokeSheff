@@ -81,7 +81,7 @@ export default function LoginScreen() {
       await SecureStore.setItemAsync('token', data.token);
 
       // Navigate to the protected area of the app
-      router.replace('/(protected)/index');
+      router.replace('/feed');
 
     } catch (error) {
       // This runs if the device couldn't reach the server at all

@@ -1,0 +1,20 @@
+{
+  "welcome":       "Welcome, Chef!",
+  "cheap":         "Cheap Meals",
+  "fast":          "Fast (Under 15m)",
+  "protein":       "High Protein",
+  "loading":       "Loading recipes...",
+  "feedError":     "Could not load recipes. Check your API key.",
+  "empty":         "No recipes found. Try a different filter.",
+  "minutes":       "min",
+  "ingredients":   "Ingredients",
+  "instructions":  "Instructions",
+  "servings":      "servings",
+  "goBack":        "Go Back",
+  "detailError":   "Could not load this recipe.",
+  "noSteps":       "No step-by-step instructions available for this recipe.",
+  "tagCheap":      "Cheap",
+  "tagHealthy":    "Healthy",
+  "tagVegetarian": "Vegetarian",
+  "selectLanguage":"Select Language"
+}

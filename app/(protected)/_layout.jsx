@@ -15,8 +15,9 @@ export default function ProtectedLayout() {
       const token = await SecureStore.getItemAsync('token');
 
       if (!token) {
-        // No token found send the user to login
+        // No token found — send the user to login
         router.replace('/login');
+        return; // stop here, don't render the protected screen
       }
 
       // Token existsstop showing the spinner and render the screen
