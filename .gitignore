@@ -5,6 +5,7 @@ node_modules/
 
 # Backend – local file-based DB (contains hashed passwords, never commit)
 backend/users.json
+backend/history.json
 
 # Expo
 .expo/

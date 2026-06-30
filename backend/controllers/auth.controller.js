@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const USERS_FILE = path.join(__dirname, '..', 'users.json');
 
 
-// load all users from the file ---
+// load all users from the file 
 function getUsers() {
   // If the file doesn't exist yet, create it with an empty array
   if (!fs.existsSync(USERS_FILE)) {

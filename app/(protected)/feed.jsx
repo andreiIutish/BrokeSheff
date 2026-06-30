@@ -18,7 +18,7 @@ import * as SecureStore from 'expo-secure-store';
 import { useTranslation } from 'react-i18next';
 
 
-// ─── Supported languages ─────────────────────────────────────────────────────
+// Supported languages 
 const LANGUAGES = [
   { code: 'en', label: 'English' },
   { code: 'he', label: 'עברית' },
@@ -27,7 +27,7 @@ const LANGUAGES = [
   { code: 'ar', label: 'العربية' },
 ];
 
-// ─── Spoonacular API URL builder ─────────────────────────────────────────────
+// Spoonacular API URL builder 
 // Builds the full URL with the right params depending on the active filter.
 
 const SPOONACULAR_BASE = 'https://api.spoonacular.com/recipes/complexSearch';
@@ -51,7 +51,7 @@ function buildUrl(activeFilter) {
 }
 
 
-// ─── Recipe Card component ───────────────────────────────────────────────────
+// Recipe Card component 
 // Defined outside the main component so it doesn't get recreated on each render.
 
 function RecipeCard({ recipe, isDark }) {
@@ -88,7 +88,7 @@ function RecipeCard({ recipe, isDark }) {
 }
 
 
-// ─── Main Feed Screen ────────────────────────────────────────────────────────
+// Main Feed Screen 
 
 export default function FeedScreen() {
 
@@ -113,7 +113,7 @@ export default function FeedScreen() {
   const [error, setError] = useState('');
 
 
-  // --- Fetch recipes from Spoonacular ---
+  // Fetch recipes from Spoonacular 
   async function fetchRecipes(isRefreshing = false) {
     if (isRefreshing) {
       setRefreshing(true);
@@ -149,19 +149,19 @@ export default function FeedScreen() {
   }, [activeFilter]);
 
 
-  // --- Toggle a filter chip ---
+  //  Toggle a filter chip 
   // Pressing the same chip twice turns it off
   function handleFilterPress(filter) {
     setActiveFilter(activeFilter === filter ? null : filter);
   }
 
-  // --- Logout ---
+  // Logout
   async function handleLogout() {
     await SecureStore.deleteItemAsync('token');
     router.replace('/login');
   }
 
-  // --- Language picker (5 options) ---
+  // Language picker (5 options) 
   function handleLanguagePress() {
     const buttons = LANGUAGES.map((item) => ({
       text: item.label,
@@ -223,7 +223,7 @@ export default function FeedScreen() {
       </View>
 
 
-      {/* ── Filter Chips ────────────────────────────────────────────────── */}
+      {/* Filter Chips  */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -250,7 +250,7 @@ export default function FeedScreen() {
       </ScrollView>
 
 
-      {/* ── Feed ────────────────────────────────────────────────────────── */}
+      {/* Feed */}
       {loading ? (
         // First load spinner
         <View style={styles.center}>
@@ -290,10 +290,10 @@ export default function FeedScreen() {
       )}
 
 
-      {/* ── AI Camera FAB ────────────────────────────────────────────────── */}
+      {/*AI Camera FAB */}
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => Alert.alert('AI Scanner', 'Opening camera...')}
+        onPress={() => router.push('/(protected)/ai')}
       >
         <Ionicons name="sparkles" size={28} color="#fff" />
       </TouchableOpacity>
@@ -303,7 +303,7 @@ export default function FeedScreen() {
 }
 
 
-// ─── Styles ──────────────────────────────────────────────────────────────────
+// Styles 
 
 const styles = StyleSheet.create({
 
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  // ── Header
+  // Header
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 
-  // ── Filter bar
+  // Filter bar
   filterBar: {
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-  // ── Feed list
+  // Feed list
   listContent: {
     padding: 16,
     paddingBottom: 100, // space so the FAB doesn't cover the last card
@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
 
-  // ── Recipe card
+  // Recipe card
   card: {
     borderRadius: 16,
     marginBottom: 16,
@@ -437,7 +437,7 @@ const styles = StyleSheet.create({
     color: '#888',
   },
 
-  // ── FAB
+  //  FAB
   fab: {
     position: 'absolute',
     bottom: 28,

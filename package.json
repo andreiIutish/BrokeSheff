@@ -3,11 +3,11 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --host lan",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
+    "android": "expo start --host lan --android",
+    "ios": "expo start --host lan --ios",
+    "web": "expo start --host lan --web",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -21,6 +21,8 @@
     "expo-font": "~14.0.11",
     "expo-haptics": "~15.0.8",
     "expo-image": "~3.0.11",
+    "expo-image-manipulator": "~14.0.8",
+    "expo-image-picker": "~17.0.11",
     "expo-linking": "~8.0.12",
     "expo-localization": "~17.0.9",
     "expo-router": "~6.0.23",

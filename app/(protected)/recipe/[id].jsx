@@ -28,7 +28,7 @@ export default function RecipeDetailScreen() {
   const [error, setError]     = useState('');
 
 
-  // --- Fetch full recipe details when the screen loads ---
+  // Fetch full recipe details when the screen loads
   useEffect(() => {
     async function fetchRecipeDetail() {
       try {
@@ -56,7 +56,7 @@ export default function RecipeDetailScreen() {
   }, [id]);
 
 
-  // --- Loading state ---
+  // Loading state
   if (loading) {
     return (
       <View style={styles.center}>
@@ -65,7 +65,7 @@ export default function RecipeDetailScreen() {
     );
   }
 
-  // --- Error state ---
+  // Error state
   if (error) {
     return (
       <View style={styles.center}>
@@ -81,12 +81,12 @@ export default function RecipeDetailScreen() {
   const steps = recipe.analyzedInstructions?.[0]?.steps || [];
 
 
-  // --- Full detail UI ---
+  // Full detail UI 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
 
-        {/* ── Hero image + back button ──────────────────────────── */}
+        {/* Hero image + back button*/}
         <View style={styles.imageContainer}>
           <Image
             source={{ uri: recipe.image }}
@@ -102,10 +102,10 @@ export default function RecipeDetailScreen() {
 
         <View style={styles.body}>
 
-          {/* ── Title ────────────────────────────────────────────── */}
+          {/* Title */}
           <Text style={styles.title}>{recipe.title}</Text>
 
-          {/* ── Meta row: time + servings + tags ─────────────────── */}
+          {/* Meta row: time + servings + tags */}
           <View style={styles.metaRow}>
 
             <View style={styles.metaItem}>
@@ -138,7 +138,7 @@ export default function RecipeDetailScreen() {
 
           </View>
 
-          {/* ── Ingredients ──────────────────────────────────────── */}
+          {/* Ingredients */}
           <Text style={styles.sectionTitle}>{t('ingredients')}</Text>
 
           {recipe.extendedIngredients?.map((ingredient, index) => (
@@ -148,7 +148,7 @@ export default function RecipeDetailScreen() {
             </View>
           ))}
 
-          {/* ── Instructions ─────────────────────────────────────── */}
+          {/* Instructions */}
           {steps.length > 0 && (
             <>
               <Text style={styles.sectionTitle}>{t('instructions')}</Text>
