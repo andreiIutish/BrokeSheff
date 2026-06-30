@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 // Local DB 
 const USERS_FILE = path.join(__dirname, '..', 'users.json');
+const HISTORY_FILE = path.join(__dirname, '..', 'history.json');
 
 
 // load all users from the file 
@@ -22,6 +23,21 @@ function getUsers() {
 //save the users array back to the file
 function saveUsers(users) {
   fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+}
+
+// Load AI chat history from file.
+function getHistory() {
+  if (!fs.existsSync(HISTORY_FILE)) {
+    fs.writeFileSync(HISTORY_FILE, '[]');
+  }
+
+  const fileContent = fs.readFileSync(HISTORY_FILE, 'utf8');
+  return JSON.parse(fileContent);
+}
+
+// Save AI chat history back to file.
+function saveHistory(history) {
+  fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
 }
 
 
@@ -151,4 +167,133 @@ const getMe = async (req, res, next) => {
 };
 
 
-module.exports = { register, login, getMe };
+// UPDATE PROFILE
+// PUT /api/auth/profile
+// Body: { email, currentPassword, newPassword }
+const updateProfile = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const currentPassword = req.body.currentPassword;
+    const newPassword = req.body.newPassword;
+
+    // Require current password for security before changing data.
+    if (!currentPassword) {
+      return res.status(400).json({ success: false, message: 'Current password is required' });
+    }
+
+    // At least one field must be changed.
+    if (!email && !newPassword) {
+      return res.status(400).json({ success: false, message: 'Provide email and/or new password' });
+    }
+
+    const users = getUsers();
+    const userIndex = users.findIndex((u) => u.id === req.user.id);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    const user = users[userIndex];
+    const passwordIsCorrect = await bcrypt.compare(currentPassword, user.password);
+
+    if (!passwordIsCorrect) {
+      return res.status(401).json({ success: false, message: 'Current password is incorrect' });
+    }
+
+    // Update email if provided.
+    if (email) {
+      const normalizedEmail = email.toLowerCase().trim();
+
+      if (!normalizedEmail.includes('@')) {
+        return res.status(400).json({ success: false, message: 'Please provide a valid email' });
+      }
+
+      const emailTakenByAnotherUser = users.find(
+        (u) => u.email === normalizedEmail && u.id !== user.id
+      );
+
+      if (emailTakenByAnotherUser) {
+        return res.status(409).json({ success: false, message: 'Email already in use' });
+      }
+
+      user.email = normalizedEmail;
+    }
+
+    // Update password if provided.
+    if (newPassword) {
+      if (newPassword.length < 6) {
+        return res.status(400).json({ success: false, message: 'New password must be at least 6 characters' });
+      }
+
+      user.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    users[userIndex] = user;
+    saveUsers(users);
+
+    // Re-issue a token so the email inside token stays up to date.
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: 'Profile updated successfully',
+      token,
+      user: { id: user.id, email: user.email, createdAt: user.createdAt },
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+// DELETE PROFILE
+// DELETE /api/auth/profile
+// Body: { currentPassword }
+const deleteProfile = async (req, res, next) => {
+  try {
+    const currentPassword = req.body.currentPassword;
+
+    if (!currentPassword) {
+      return res.status(400).json({ success: false, message: 'Current password is required' });
+    }
+
+    const users = getUsers();
+    const userIndex = users.findIndex((u) => u.id === req.user.id);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    const user = users[userIndex];
+    const passwordIsCorrect = await bcrypt.compare(currentPassword, user.password);
+
+    if (!passwordIsCorrect) {
+      return res.status(401).json({ success: false, message: 'Current password is incorrect' });
+    }
+
+    // Remove user from users file.
+    users.splice(userIndex, 1);
+    saveUsers(users);
+
+    // Remove this user's AI chats from history file.
+    const history = getHistory();
+    const filteredHistory = history.filter((chat) => chat.userId !== user.id);
+    saveHistory(filteredHistory);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Profile deleted successfully',
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+module.exports = { register, login, getMe, updateProfile, deleteProfile };

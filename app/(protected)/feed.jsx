@@ -214,6 +214,11 @@ export default function FeedScreen() {
             <Text style={styles.langText}>{i18n.language.toUpperCase().slice(0, 2)}</Text>
           </TouchableOpacity>
 
+          {/* Profile settings */}
+          <TouchableOpacity onPress={() => router.push('/(protected)/settings')} style={styles.iconButton}>
+            <Ionicons name="person-circle-outline" size={24} color={textColor} />
+          </TouchableOpacity>
+
           {/* Logout */}
           <TouchableOpacity onPress={handleLogout} style={styles.iconButton}>
             <Ionicons name="log-out-outline" size={22} color={textColor} />
